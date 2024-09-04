@@ -7,10 +7,10 @@
 | nickname            | string     | null: false                    |
 | email               | string     | null: false, unique: true      |
 | encrypted_password  | string     | null: false                    |
-| first_name(zenkaku) | string     | null: false                    |
-| last_name(zenkaku)  | string     | null: false                    |
-| first_name(katakana)| string     | null: false                    |
-| last_name(katakana) | string     | null: false                    |
+| first_name_zenkaku  | string     | null: false                    |
+| last_name_zenkaku   | string     | null: false                    |
+| first_name_katakana | string     | null: false                    |
+| last_name_katakana  | string     | null: false                    |
 | birthday            | date       | null: false                    |
 
 ### Association
@@ -27,7 +27,7 @@
 | category_id         | integer    | null: false                    |
 | condition_id        | integer    | null: false                    |
 | shipping_cost_id    | integer    | null: false                    |
-| shipping_area_id    | integer    | null: false                    |
+| prefecture_id       | integer    | null: false                    |
 | shipping_day_id     | integer    | null: false                    |
 | price               | integer    | null: false                    |
 | user                | references | null: false, foreign_key: true |
@@ -35,7 +35,7 @@
 ### Association
 
 - belongs_to:user
-- has_one:purchases
+- has_one:purchase
 
 ## purchases テーブル
 
@@ -57,10 +57,10 @@
 | post_code           | string     | null: false                    |
 | prefecture_id       | integer    | null: false                    |
 | city                | string     | null: false                    |
-| house_number        | text       | null: false                    |
-| building_name       | text       |                                |
+| house_number        | string     | null: false                    |
+| building_name       | string     |                                |
 | telephone_number    | string     | null: false                    |
-| purchases           | references | null: false, foreign_key: true |
+| purchase            | references | null: false, foreign_key: true |
 
 ### Association
 
