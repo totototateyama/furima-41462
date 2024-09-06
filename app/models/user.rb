@@ -16,7 +16,7 @@ class User < ApplicationRecord
     validates :last_name_zenkaku
   end
 
-  with_options presence: true, format: { with: /\A[ァ-ヶ一]+\z/, message: ' is invalid. Input full-width characters' } do
+  with_options presence: true, format: { with: /\A[ァ-ヶー]+\z/, message: ' is invalid. Input full-width characters' } do
     validates :first_name_katakana
     validates :last_name_katakana
   end
