@@ -6,7 +6,7 @@
   <div class="items-sell-main">
     <h2 class="items-sell-title">商品の情報を入力</h2>
     <%= form_with model: @item, local: true do |f| %>
-    <%# ↑下記のrenderを使えるよう、form_withにインスタンスを渡した %>
+    <%# ※勉強用（完成後に削除すること！）↑下記のrenderを使えるよう、form_withにインスタンスを渡した %>
 
     <%= render 'shared/error_messages', model: f.object %>
 
