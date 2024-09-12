@@ -7,11 +7,9 @@ class ItemsController < ApplicationController
     @items = Item.all.order('created_at DESC')
   end
 
-
   def new
     @item = Item.new
   end
-
 
   def create
     @item = Item.new(item_params)
@@ -22,21 +20,17 @@ class ItemsController < ApplicationController
     end
   end
 
-
   def show
   end
 
-  
   def edit
   end
-
 
   def destroy
     item = Item.find(params[:id])
     item.destroy
     redirect_to root_path
   end
-
 
   def update
     if @item.update(item_params)
@@ -46,7 +40,6 @@ class ItemsController < ApplicationController
     end
   end
 
-
   private
 
   def item_params
@@ -54,17 +47,14 @@ class ItemsController < ApplicationController
                                  :shipping_day_id, :price, :image).merge(user_id: current_user.id)
   end
 
-
   def move_to_index
     return if user_signed_in? && current_user.id == @item.user_id
-    # ※学習用※　Rubocop実施後に、unlessからreturn if へと修正された 
+
+    # ※学習用※　Rubocop実施後に、unlessからreturn if へと修正された
     redirect_to action: :index
   end
-
 
   def set_item
     @item = Item.find(params[:id])
   end
-
-
 end
