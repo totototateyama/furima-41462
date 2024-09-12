@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_item, only: [:edit, :show, :update, :move_to_index]
   before_action :move_to_index, except: [:index, :show, :new, :create]
-  before_action :set_tweet, only: [:edit, :show]
+
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -27,7 +28,6 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to item_path(@item.id)
     else
@@ -44,13 +44,12 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    @item = Item.find(params[:id])
     return if user_signed_in? && current_user.id == @item.user_id
     # ※学習用※　Rubocop実施後に、unlessからreturn if へと修正された 
     redirect_to action: :index
   end
 
-  def set_tweet
+  def set_item
     @item = Item.find(params[:id])
   end
 
