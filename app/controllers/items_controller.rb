@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :move_to_index, except: [:index, :show, :new, :create]
+  before_action :set_tweet, only: [:edit, :show]
 
   def index
     @items = Item.all.order('created_at DESC')
@@ -12,7 +13,6 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    binding.pry
     if @item.save
       redirect_to root_path
     else
@@ -21,11 +21,9 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
@@ -51,4 +49,9 @@ class ItemsController < ApplicationController
     # ※学習用※　Rubocop実施後に、unlessからreturn if へと修正された 
     redirect_to action: :index
   end
+
+  def set_tweet
+    @item = Item.find(params[:id])
+  end
+
 end
