@@ -29,7 +29,6 @@ class ItemsController < ApplicationController
   def edit
   end
 
-
   def update
     if @item.update(item_params)
       redirect_to item_path(@item.id)
@@ -38,12 +37,10 @@ class ItemsController < ApplicationController
     end
   end
 
-  
   def destroy
     @item.destroy
     redirect_to root_path
   end
-
 
   private
 
@@ -53,7 +50,7 @@ class ItemsController < ApplicationController
   end
 
   def move_to_index
-    return if user_signed_in? && current_user.id == @item.user_id && @item.order == nil
+    return if user_signed_in? && current_user.id == @item.user_id && @item.order.nil?
 
     # ※学習用※　Rubocop実施後に、unlessからreturn if へと修正された
     redirect_to action: :index
