@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
+
   before do
     @order_address = FactoryBot.build(:order_address)
   end
 
+
   describe '配送先情報の保存' do
+
     context '内容に問題ない場合' do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@order_address).to be_valid
@@ -21,7 +24,7 @@ RSpec.describe OrderAddress, type: :model do
       it 'post_codeが空だと保存できないこと' do
         @order_address.post_code = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Post code is invalid. Include hyphen(-)')
+        expect(@order_address.errors.full_messages).to include("Post code is invalid. Include hyphen(-)")
       end
 
       it 'post_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
@@ -51,13 +54,13 @@ RSpec.describe OrderAddress, type: :model do
       it 'telephone_numberが空だと保存できないこと' do
         @order_address.telephone_number = ''
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Telephone number is invalid. Except hyphen(-)')
+        expect(@order_address.errors.full_messages).to include("Telephone number is invalid. Except hyphen(-)")
       end
 
       it 'telephone_numberが全角数字だと保存できないこと' do
         @order_address.telephone_number = '０９０１２３４５６７８'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Telephone number is invalid. Except hyphen(-)')
+        expect(@order_address.errors.full_messages).to include("Telephone number is invalid. Except hyphen(-)")
       end
 
       it 'telephone_numberが半角のハイフンを含んでいると保存できないこと' do
@@ -69,13 +72,13 @@ RSpec.describe OrderAddress, type: :model do
       it 'telephone_numberが10桁だと保存できないこと' do
         @order_address.telephone_number = '0901234567'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Telephone number is invalid. Except hyphen(-)')
+        expect(@order_address.errors.full_messages).to include("Telephone number is invalid. Except hyphen(-)")
       end
 
       it 'telephone_numberが12桁だと保存できないこと' do
         @order_address.telephone_number = '090123456789'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Telephone number is invalid. Except hyphen(-)')
+        expect(@order_address.errors.full_messages).to include("Telephone number is invalid. Except hyphen(-)")
       end
 
       it 'user_idが紐付いていないと保存できないこと' do
@@ -90,11 +93,12 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
 
-      it 'tokenが空では登録できないこと' do
+      it "tokenが空では登録できないこと" do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
       end
+
     end
   end
 end
