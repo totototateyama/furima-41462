@@ -135,7 +135,6 @@
               <div class='item-img-content'>
 
                  <%= image_tag item.image.variant(resize: '500x500'), class: "item-img" %>
-  <%# 商品が売れていればsold outを表示しましょう %>
       <% if item.order != nil %>
 
                   <div class='sold-out'>
@@ -143,7 +142,6 @@
                   </div>
       <% else %>
       <% end %>
-  <%# //商品が売れていればsold outを表示しましょう %>
               </div>
               <div class='item-info'>
                 <h3 class='item-name'>
@@ -182,7 +180,6 @@
         </li>
       <% else %>
       <% end %>
-
 
     </ul>
   </div>

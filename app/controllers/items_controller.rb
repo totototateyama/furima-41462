@@ -5,9 +5,6 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order('created_at DESC')
-
-    # @item = Item.find(params[:id])
-    # @order_address = @item.order_address
   end
 
   def new
@@ -37,13 +34,11 @@ class ItemsController < ApplicationController
       render :edit, status: :unprocessable_entity
     end
   end
-
   
   def destroy
     @item.destroy
     redirect_to root_path
   end
-
 
   private
 
@@ -54,8 +49,6 @@ class ItemsController < ApplicationController
 
   def move_to_index
     return if user_signed_in? && current_user.id == @item.user_id && @item.order == nil
-
-    # ※学習用※　Rubocop実施後に、unlessからreturn if へと修正された
     redirect_to action: :index
   end
 

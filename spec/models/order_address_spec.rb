@@ -1,9 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe OrderAddress, type: :model do
-
   before do
-    @order_address = FactoryBot.build(:order_address)
+    user = FactoryBot.create(:user)
+    item = FactoryBot.create(:item, user_id: user.id)
+    @order_address = FactoryBot.build(:order_address, user_id: user.id, item_id: item.id)
   end
 
 
@@ -18,6 +19,17 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.building_name = ''
         expect(@order_address).to be_valid
       end
+
+      it 'telephone_numberは10桁でも保存できること' do
+        @order_address.telephone_number = '0901234567'
+        expect(@order_address).to be_valid
+      end
+
+      it 'telephone_numberは11桁でも保存できること' do
+      @order_address.telephone_number = '09012345678'
+      expect(@order_address).to be_valid
+      end
+
     end
 
     context '内容に問題がある場合' do
@@ -69,8 +81,8 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include('Telephone number is invalid. Except hyphen(-)')
       end
 
-      it 'telephone_numberが10桁だと保存できないこと' do
-        @order_address.telephone_number = '0901234567'
+      it 'telephone_numberが9桁だと保存できないこと' do
+        @order_address.telephone_number = '090123456'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Telephone number is invalid. Except hyphen(-)")
       end
